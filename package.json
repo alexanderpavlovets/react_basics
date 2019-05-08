@@ -1,0 +1,23 @@
+{
+  "name": "react_basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-react": "create-react-app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexanderpavlovets/react_basics.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexanderpavlovets/react_basics/issues"
+  },
+  "homepage": "https://github.com/alexanderpavlovets/react_basics#readme",
+  "dependencies": {
+    "create-react-app": "^3.0.1"
+  }
+}
