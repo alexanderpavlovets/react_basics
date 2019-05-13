@@ -9,15 +9,28 @@ export default class TodoListItem extends Component {
   }
 
   onLabelClick = () => {
-    this.setState({done: true})
+    this.setState(({done}) => {
+      return {
+        done: !done
+      }
+    })
   }
 
   onMarkImportant = () => {
-    this.setState({important: true})
+    /**
+     * @param state - this is variable with link to component state. You can destructure it.
+     * pay attention! setState is async from-time-to-time, to change state properly - pass function to it 
+     * ALWAYS use function when state is dependent from previous state!
+     */
+    this.setState(({important}) => {
+      return {
+        important: !important
+      }
+    })
   }
 
   render () {
-    const { label } = this.props
+    const { label, onDeleted } = this.props
     const { done, important } = this.state
 
     let classNames = "todo-list-item"
@@ -43,7 +56,8 @@ export default class TodoListItem extends Component {
         </button>
   
         <button type="button"
-                className="btn btn-outline-danger btn-sm float-right">
+                className="btn btn-outline-danger btn-sm float-right"
+                onClick={onDeleted}>
           <i className="fa fa-trash-o" />
         </button>
       </span>
