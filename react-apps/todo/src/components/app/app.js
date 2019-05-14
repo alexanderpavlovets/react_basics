@@ -33,12 +33,20 @@ export default class App extends Component {
     const id = this.state.todoData.map((el) => el.id).sort((a, b) => b - a )[0] + 1
     // add element in array
     const newArray = [...this.state.todoData, {label: text, important: false, id}]
-    
+
     this.setState(() => {
       return {
         todoData: newArray
       }
     })
+  }
+
+  onToggleImportant = (id) => {
+    console.log('Toggle Important ', id)
+  }
+
+  onToggleDone = (id) => {
+    console.log('Toggle Done ', id)
   }
 
   render() {
@@ -52,7 +60,10 @@ export default class App extends Component {
 
         <TodoList
           todos={this.state.todoData}
-          onDeleted={(id) => this.deleteItem(id)} />
+          onDeleted={(id) => this.deleteItem(id)} 
+          onToggleImportant={(id) => this.onToggleImportant(id)}
+          onToggleDone={(id) => this.onToggleDone(id)}
+        />
 
         <ItemAddForm 
           onItemAdded={(text) => this.addItem(text)}/>
