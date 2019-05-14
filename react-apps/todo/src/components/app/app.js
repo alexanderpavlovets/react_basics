@@ -17,6 +17,7 @@ export default class App extends Component {
   }
 
   deleteItem = (id) => {
+    // to refactor - setState should be "pure function" - no logic, only state changes
     this.setState(({todoData}) => {
       const ind = todoData.findIndex((el) => el.id === id)
       const newArray = [...todoData.slice(0, ind), ...todoData.slice(ind + 1)]
@@ -29,11 +30,14 @@ export default class App extends Component {
 
   addItem = (text) => {
     // generate id
-    // this.state - continue from HERE !!!!
-
-    // add element in array 
-    this.setState(({todoData}) => {
-      console.log(text)
+    const id = this.state.todoData.map((el) => el.id).sort((a, b) => b - a )[0] + 1
+    // add element in array
+    const newArray = [...this.state.todoData, {label: text, important: false, id}]
+    
+    this.setState(() => {
+      return {
+        todoData: newArray
+      }
     })
   }
 
@@ -51,7 +55,7 @@ export default class App extends Component {
           onDeleted={(id) => this.deleteItem(id)} />
 
         <ItemAddForm 
-          onItemAdded={(item) => this.addItem(item)}/>
+          onItemAdded={(text) => this.addItem(text)}/>
       </div>
     )
   }
