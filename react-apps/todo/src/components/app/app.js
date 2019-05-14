@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import AppHeader from '../app-header'
 import SearchPanel from '../search-panel'
 import TodoList from '../todo-list'
+import ItemAddForm from '../item-add-form'
 import ItemStatusFilter from '../item-status-filter'
 import './app.css'
 
@@ -26,6 +27,16 @@ export default class App extends Component {
     })
   }
 
+  addItem = (text) => {
+    // generate id
+    // this.state - continue from HERE !!!!
+
+    // add element in array 
+    this.setState(({todoData}) => {
+      console.log(text)
+    })
+  }
+
   render() {
     return (
       <div className="todo-app">
@@ -38,6 +49,9 @@ export default class App extends Component {
         <TodoList
           todos={this.state.todoData}
           onDeleted={(id) => this.deleteItem(id)} />
+
+        <ItemAddForm 
+          onItemAdded={(item) => this.addItem(item)}/>
       </div>
     )
   }
