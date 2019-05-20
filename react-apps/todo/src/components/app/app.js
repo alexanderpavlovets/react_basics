@@ -22,7 +22,8 @@ startrId = 1
     return {
       label,
       important: false,
-      id: this.startrId++
+      id: this.startrId++,
+      isVisible: true
     }
   }
 
@@ -79,6 +80,20 @@ startrId = 1
     })
   }
 
+  onSearchEntered = (phrase) => {
+    this.setState(({todoData}) => {
+      const visibleItems = todoData.map((el) => {
+        if (!el.label.toLowerCase().includes(phrase.toLowerCase())) {
+          return {...el, isVisible: false}
+        }
+        return {...el, isVisible: true}
+      })
+      return {
+        todoData: visibleItems
+      }
+    })
+  }
+
   render() {
     const {todoData} = this.state
     const doneCount = todoData.filter((el) => el.done).length
@@ -88,7 +103,7 @@ startrId = 1
       <div className="todo-app">
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
-          <SearchPanel />
+          <SearchPanel onSearchEntered={(phrase) => this.onSearchEntered(phrase)}/>
           <ItemStatusFilter />
         </div>
 

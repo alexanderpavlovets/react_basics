@@ -4,7 +4,9 @@ import './todo-list.css'
 
 const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }) => {
 
-  const elements = todos.map((item) => {
+  const visibleElememnts = todos.filter((el) => el.isVisible)
+
+  const elements = visibleElememnts.map((item) => {
     const { id, ...itemProps } = item
     return (
       <li key={id} className="list-group-item">
