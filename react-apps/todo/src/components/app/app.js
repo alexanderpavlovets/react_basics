@@ -15,6 +15,11 @@ startrId = 1
       this.createTodoItem('Drink Coffee'),
       this.createTodoItem('Make Awesome App'),
       this.createTodoItem('Have a lunch')
+    ],
+    filterData: [
+      {id: 1, label: 'All', isSelected: true},
+      {id: 2, label: 'Active', isSelected: false},
+      {id: 3, label: 'Done', isSelected: false}
     ]
   }
 
@@ -23,6 +28,7 @@ startrId = 1
       label,
       important: false,
       id: this.startrId++,
+      done: false,
       isVisible: true
     }
   }
@@ -83,7 +89,7 @@ startrId = 1
   onSearchEntered = (phrase) => {
     this.setState(({todoData}) => {
       const visibleItems = todoData.map((el) => {
-        if (!el.label.toLowerCase().includes(phrase.toLowerCase())) {
+        if (!el.label.toLowerCase().includes(phrase.toLowerCase().trim())) {
           return {...el, isVisible: false}
         }
         return {...el, isVisible: true}
@@ -94,9 +100,33 @@ startrId = 1
     })
   }
 
+  onChooseFilter = (id) => {
+    this.setState(({todoData, filterData}) => {
+      const filters = filterData.map((el) => {
+        return {
+          ...el,
+          isSelected: el.id === id ? true : false
+        }
+      })
+      const selectedFilter = filters.find((el) => el.isSelected).label
+      const todos = todoData.map((el) => {
+        if (selectedFilter === 'All') {
+          return {...el, isVisible: true}
+        } else {
+          return {...el, isVisible: selectedFilter === 'Done' ? el.done : !el.done}
+        }
+      })
+      return {
+        filterData: filters,
+        todoData: todos
+      }
+    })
+  }
+
   render() {
-    const {todoData} = this.state
+    const {todoData, filterData} = this.state
     const doneCount = todoData.filter((el) => el.done).length
+    
     const todoCount = todoData.length - doneCount
 
     return (
@@ -104,7 +134,9 @@ startrId = 1
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel onSearchEntered={(phrase) => this.onSearchEntered(phrase)}/>
-          <ItemStatusFilter />
+          <ItemStatusFilter 
+            filters={filterData}
+            onChooseFilter={(id) => this.onChooseFilter(id)}/>
         </div>
 
         <TodoList
