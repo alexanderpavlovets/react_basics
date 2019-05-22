@@ -134,6 +134,7 @@ startrId = 1
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel onSearchEntered={(phrase) => this.onSearchEntered(phrase)}/>
+          {/* <SearchPanel onSearchEntered={this.onSearchEntered}/> // same effect, unclear that parameter is passed */}
           <ItemStatusFilter 
             filters={filterData}
             onChooseFilter={(id) => this.onChooseFilter(id)}/>
