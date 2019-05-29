@@ -1,17 +1,49 @@
-console.log('Hello from React')
+class SwapiService {
 
-const getResource = async (url) => {
-  const resp = await fetch(url)
+  _apiBase = 'https://swapi.co/api'
 
-  if (!resp.ok) {
-    throw new Error(`Could not fetch ${url}. Got ${resp.status}`)
+  async getResource(url) {
+    const resp = await fetch(`${this._apiBase}${url}`)
+
+    if (!resp.ok) {
+      throw new Error(`Could not fetch ${url}. Got ${resp.status}`)
+    }
+    const body = await resp.json()
+    return body
   }
-  const body = await resp.json()
-  return body
+
+  async getAllPeople() {
+    const resp = await this.getResource(`/people/`)
+    return resp.results
+  }
+
+  getPerson(id) {
+    return this.getResource(`/people/${id}/`)
+  }
+
+  async getAllPlanets() {
+    const resp = await this.getResource(`/planets/`)
+    return resp.results
+  }
+
+  getPlanet(id) {
+    return this.getResource(`/planet/${id}/`)
+  }
+
+  async getAllStarships() {
+    const resp = await this.getResource(`/starships/`)
+    return resp.results
+  }
+
+  getStarship(id) {
+    return this.getResource(`/starships/${id}/`)
+  }
+
 }
 
-getResource('https://swapi.co/api/people/1asdasd')
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err))
+const swapi = new SwapiService()
 
-console.log('React app')
+swapi.getAllPeople().then(console.log)
+swapi.getAllPlanets().then(console.log)
+swapi.getAllStarships().then(console.log)
+// swapi.getAllPeople().then(console.log)
