@@ -19,17 +19,16 @@ export default class RandomPlanet extends Component {
     this.setState({planet})
   }
 
-  updatePlanet() {
-    const id = Math.floor(Math.random() * 23) + 2
-    this.swapiService
-      .getPlanet(id)
-      .then(this.onPlanetLoaded)
+  updatePlanet = async () => {
+    const id = Math.floor(Math.random() * 20) + 2
+    const a = await this.swapiService.getPlanet(id)
+    this.onPlanetLoaded(a)
   }
 
   render() {
     const { planet: {id, name, population, rotationPeriod, diameter}} = this.state
     return (
-      <div className="random-planet jumbotron rounded">
+      <div className="random-planet jumbotron rounded" onClick={this.updatePlanet}>
         <img className="planet-image"
              alt = "Can't find planet"
              src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
