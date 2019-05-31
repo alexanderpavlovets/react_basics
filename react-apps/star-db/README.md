@@ -27,7 +27,7 @@ constructor() => render => componentDidMount()
 
 UPDATES:
 
-New Props | setState => render() => componentDidUpdate()
+New Props | setState => render() => componentDidUpdate(prevProps, prevState)
 
 UNMOUNTING:
 
