@@ -5,6 +5,8 @@
 - npm start
 - open localhost:3000 in the browser
 
+___
+
 ## Advices: 
 
 ### Common:
@@ -15,3 +17,24 @@
 - React doesn't know anything about server. It just rendering the data. 
 - Isolate API logic from Components. Components should only receive data. 
 - If needed, transform data before pass it to the component.
+
+___
+
+## Component life-cycles (not full):
+MOUNTING: 
+
+constructor() => render => componentDidMount()
+
+UPDATES:
+
+New Props | setState => render() => componentDidUpdate()
+
+UNMOUNTING:
+
+componentWillUnmount()
+
+ERROR:
+
+componentDidCatch()
+
+___
