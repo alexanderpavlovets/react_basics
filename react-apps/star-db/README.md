@@ -31,7 +31,7 @@ New Props | setState => render() => componentDidUpdate(prevProps, prevState)
 
 UNMOUNTING:
 
-componentWillUnmount()
+componentWillUnmount() // good place for clearing intervals for example. Removing possible memory leaks.
 
 ERROR:
 
