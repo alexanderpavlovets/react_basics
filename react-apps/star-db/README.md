@@ -35,7 +35,7 @@ componentWillUnmount() // good place for clearing intervals for example. Removin
 
 ERROR:
 
-componentDidCatch() // Error boundary. If declared in App (higher level) will down all app, if declared lower - only components that lower in hierarchy
+componentDidCatch(err, info) // Error boundary. If declared in App (higher level) will down all app, if declared lower - only components that lower in hierarchy
 
 Work for errors of rendering and errors in lifeCycleHooks! Do not work with async code errors (API and event listeners for ex.) 
 
