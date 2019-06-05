@@ -32,8 +32,6 @@ export default class App extends Component {
         <RandomPlanet />
         <ErrorButton />
         <PeoplePage />
-        <PeoplePage />
-        <PeoplePage />
       </div>
     )
   }
