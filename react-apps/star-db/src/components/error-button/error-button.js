@@ -9,7 +9,7 @@ export default class ErrorButton extends Component {
 
   render() {
     if (this.state.renderError) {
-      this.foo.bar = 0
+      this.foo.bar = 0 // make an error
     }
 
     return (

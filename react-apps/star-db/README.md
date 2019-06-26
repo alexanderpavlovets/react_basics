@@ -40,3 +40,5 @@ componentDidCatch(err, info) // Error boundary. If declared in App (higher level
 Work for errors of rendering and errors in lifeCycleHooks! Do not work with async code errors (API and event listeners for ex.) 
 
 ___
+
+// 71

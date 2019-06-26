@@ -16,7 +16,6 @@ export default class App extends Component {
   // In Prod mode - react will stop the app and render ErrorIndicator
   // If this didCatch fire - whole app is down. Make didCatch on lower levels to fix it
   componentDidCatch() {
-    console.log('component did catch ')
     this.setState({hasError: true})
   }
 
